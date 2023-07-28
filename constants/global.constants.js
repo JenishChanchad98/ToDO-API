@@ -1,0 +1,16 @@
+module.exports = {
+  ERROR: 0,
+  SUCCESS: 1,
+
+  OK: 200,
+  BAD_REQUEST: 400,
+  AUTHORIZATION_ERROR: 401,
+  FORBIDDEN_ERROR: 403,
+  PAGE_NOT_FOUND: 404,
+  VALIDATION_CODE: 417,
+  INTERNAL_SERVER_ERROR_CODE: 500,
+
+  INTERNAL_SERVER_ERROR: "Internal server error!",
+  TOKEN_REQUIRED: "Token is required.",
+  AUTH_ERROR: "Authentication Error",
+};

@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "57b263f0-4236-45dc-b90e-ab4cd5aae6b1",
+		"name": "TODO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21307213"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"mahesh\",\r\n    \"password\": \"Mahesh@123\",\r\n    \"first_name\": \"Mahesh\",\r\n    \"last_name\": \"Patel\",\r\n    \"mobile\": \"7069525825\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"mahesh\",\r\n    \"password\": \"Mahesh@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "To Do",
+			"item": [
+				{
+					"name": "Add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzNmRiZGFkMGQzZDMzYjkyZjRhY2QiLCJ1c2VybmFtZSI6Im1haGVzaCIsImlhdCI6MTY5MDUyOTIyNSwiZXhwIjoxNjkwNTMyODI1fQ.g2f-kF23MI8SqASH9QdL2exDkLa9vhpZMwSBT-bQR7M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Laptop\",\r\n    \"description\": \"Laptop in add SSD\",\r\n    \"duedate\" : \"2023-07-29\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/todo/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"todo",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzNWEzNzE5OWRjMmQ2YTUyYjk0OTUiLCJ1c2VybmFtZSI6ImplbmlzaCIsImlhdCI6MTY5MDUyNjU1NiwiZXhwIjoxNjkwNTMwMTU2fQ.s0x6xQE-ZleDBzqE1COwxR1643JZxigvIQPYnH1ei-k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Bank related 123\",\r\n    \"description\": \"Link Pan card 123\",\r\n    \"duedate\" : \"2023-07-30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/todo/edit/64c363c1c33a654ca014bc3a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"todo",
+								"edit",
+								"64c363c1c33a654ca014bc3a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzNWEzNzE5OWRjMmQ2YTUyYjk0OTUiLCJ1c2VybmFtZSI6ImplbmlzaCIsImlhdCI6MTY5MDUyNjU1NiwiZXhwIjoxNjkwNTMwMTU2fQ.s0x6xQE-ZleDBzqE1COwxR1643JZxigvIQPYnH1ei-k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/todo/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"todo",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get users wise todo and date wise filter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzNmRiZGFkMGQzZDMzYjkyZjRhY2QiLCJ1c2VybmFtZSI6Im1haGVzaCIsImlhdCI6MTY5MDUyOTIyNSwiZXhwIjoxNjkwNTMyODI1fQ.g2f-kF23MI8SqASH9QdL2exDkLa9vhpZMwSBT-bQR7M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"date\": \"2023-07-29\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/todo/getuserstodo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"todo",
+								"getuserstodo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update todo status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzNWEzNzE5OWRjMmQ2YTUyYjk0OTUiLCJ1c2VybmFtZSI6ImplbmlzaCIsImlhdCI6MTY5MDUyNjU1NiwiZXhwIjoxNjkwNTMwMTU2fQ.s0x6xQE-ZleDBzqE1COwxR1643JZxigvIQPYnH1ei-k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/todo/updatestatus/64c3686616255b97cb0e04fc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"todo",
+								"updatestatus",
+								"64c3686616255b97cb0e04fc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
