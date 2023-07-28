@@ -6,6 +6,7 @@ const {
   SUCCESS,
   VALIDATION_CODE,
   INTERNAL_SERVER_ERROR_CODE,
+  BAD_REQUEST,
 } = require("../constants/global.constants");
 const {
   passwordHash,
@@ -23,7 +24,7 @@ const register = async (req, res) => {
     });
 
     if (existUser) {
-      return res.status(VALIDATION_CODE).json({
+      return res.status(BAD_REQUEST).json({
         status: ERROR,
         message: "User name is exits",
         data: {},
@@ -32,6 +33,20 @@ const register = async (req, res) => {
 
     body.password = await passwordHash(body.password);
     const userData = await User.create(body);
+
+    const tokenObj = {
+      _id: userData._id,
+      username: userData.username,
+      name: userData.name,
+    };
+
+    const token = authService.generateToken(tokenObj);
+    userData.token = token;
+
+    await User.findOneAndUpdate(
+      { _id: userData._id },
+      { $set: { token: token } }
+    );
 
     if (userData) {
       return res.status(OK).json({
@@ -71,6 +86,7 @@ const login = async (req, res) => {
     ) {
       findUser = findUser.toObject();
       delete findUser.password;
+      delete findUser.token;
 
       const tokenObj = {
         _id: findUser._id,
@@ -79,6 +95,7 @@ const login = async (req, res) => {
       };
 
       const token = authService.generateToken(tokenObj);
+      findUser.token = token;
 
       await User.findOneAndUpdate(
         { _id: findUser._id },
@@ -88,7 +105,7 @@ const login = async (req, res) => {
       return res.status(OK).json({
         status: SUCCESS,
         message: "login successful",
-        data: { token: token, findUser },
+        data: findUser,
       });
     }
 

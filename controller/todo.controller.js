@@ -12,7 +12,20 @@ const add = async (req, res) => {
   try {
     let body = req.body;
     body.user = req.userId;
+
+    const currentDate = new Date();
     body.duedate = new Date(body.duedate);
+
+    currentDate.setHours(0, 0, 0, 0);
+    body.duedate.setHours(0, 0, 0, 0);
+
+    if (body.duedate <= currentDate) {
+      return res.status(BAD_REQUEST).json({
+        status: ERROR,
+        message: "Due date must be in the future.",
+        data: {},
+      });
+    }
 
     const addTodo = await TodoTask.create(body);
     if (addTodo) {
@@ -114,12 +127,14 @@ const getUsersToDo = async (req, res) => {
 
 const deleteToDo = async (req, res) => {
   try {
+    const userId = req.userId;
     const currentDate = new Date();
     const isoDate =
       currentDate.toISOString().split("T")[0] + "T00:00:00.000+00:00";
 
     const findTodayToDO = await TodoTask.deleteMany({
       duedate: isoDate,
+      user: userId,
     });
 
     if (findTodayToDO) {
