@@ -4,11 +4,12 @@ const {
   OK,
   ERROR,
   SUCCESS,
+  DATA_CREATED,
   INTERNAL_SERVER_ERROR_CODE,
   BAD_REQUEST,
 } = require("../constants/global.constants");
 
-const add = async (req, res) => {
+exports.add = async (req, res) => {
   try {
     let body = req.body;
     body.user = req.userId;
@@ -23,13 +24,12 @@ const add = async (req, res) => {
       return res.status(BAD_REQUEST).json({
         status: ERROR,
         message: "Due date must be in the future.",
-        data: {},
       });
     }
 
     const addTodo = await TodoTask.create(body);
     if (addTodo) {
-      return res.status(OK).json({
+      return res.status(DATA_CREATED).json({
         status: SUCCESS,
         message: "Todo in added",
         data: addTodo,
@@ -39,26 +39,44 @@ const add = async (req, res) => {
     return res.status(OK).json({
       status: ERROR,
       message: "Todo in not added",
-      data: {},
     });
   } catch (err) {
-    console.log("TODO ERROR MESSAGE -->", err);
+    // console.log("TODO ERROR MESSAGE -->", err);
 
     return res.status(INTERNAL_SERVER_ERROR_CODE).json({
       status: ERROR,
       message: "Internal server error",
-      data: {},
     });
   }
 };
 
-const edit = async (req, res) => {
+exports.edit = async (req, res) => {
   try {
     const { id } = req.params;
-    let body = req.body;
-    body.duedate = new Date(body.duedate);
+    const userId = req.userId;
+    const updateData = req.body;
 
-    const todoUpdate = await TodoTask.findByIdAndUpdate(id, body, {
+    const todo = await TodoTask.findById(id);
+
+    if (!todo) {
+      return res.status(BAD_REQUEST).json({
+        status: ERROR,
+        message: "Todo not found",
+      });
+    }
+
+    if (todo.createdBy.toString() !== userId) {
+      return res.status(BAD_REQUEST).json({
+        status: ERROR,
+        message: "You are not authorized to update this todo",
+      });
+    }
+
+    if (updateData.duedate) {
+      updateData.duedate = new Date(updateData.duedate);
+    }
+
+    const todoUpdate = await TodoTask.findByIdAndUpdate(id, updateData, {
       new: true,
     });
 
@@ -71,22 +89,20 @@ const edit = async (req, res) => {
     }
 
     return res.status(BAD_REQUEST).json({
-      status: SUCCESS,
-      message: "Todo not updated",
-      data: todoUpdate,
+      status: ERROR,
+      message: "Todo not found or could not be updated",
     });
   } catch (err) {
-    console.log("TODO UPDATE ERROR -->", err);
+    console.error("TODO UPDATE ERROR -->", err);
 
     return res.status(INTERNAL_SERVER_ERROR_CODE).json({
       status: ERROR,
       message: "Internal server error",
-      data: {},
     });
   }
 };
 
-const getUsersToDo = async (req, res) => {
+exports.getUsersToDo = async (req, res) => {
   try {
     let condition = {
       user: req.userId,
@@ -95,7 +111,6 @@ const getUsersToDo = async (req, res) => {
     if (req.body.date) {
       condition.duedate = new Date(req.body.date);
     }
-    // console.log(condition);
 
     const findTodo = await TodoTask.find(condition).sort({
       createdAt: -1,
@@ -104,28 +119,26 @@ const getUsersToDo = async (req, res) => {
     if (findTodo.length > 0) {
       return res.status(OK).json({
         status: SUCCESS,
-        message: "Get all todo list",
+        message: "All todo list",
         data: findTodo,
       });
+    } else {
+      return res.status(OK).json({
+        status: SUCCESS,
+        message: "No todo list",
+      });
     }
-
-    return res.status(OK).json({
-      status: ERROR,
-      message: "No todo list",
-      data: {},
-    });
   } catch (err) {
-    console.log("GET TODO LIST ERROR --->", err);
+    // console.error("GET TODO LIST ERROR --->", err);
 
     return res.status(INTERNAL_SERVER_ERROR_CODE).json({
       status: ERROR,
       message: "Internal server error",
-      data: {},
     });
   }
 };
 
-const deleteToDo = async (req, res) => {
+exports.deleteToDo = async (req, res) => {
   try {
     const userId = req.userId;
     const currentDate = new Date();
@@ -141,45 +154,48 @@ const deleteToDo = async (req, res) => {
       return res.status(OK).json({
         status: SUCCESS,
         message: "Today todo delete",
-        data: {},
       });
     }
 
     return res.status(OK).json({
       status: ERROR,
       message: "Today todo not delete",
-      data: {},
     });
   } catch (err) {
-    console.log("TODO DELETE ERROR --->", err);
+    // console.log("TODO DELETE ERROR --->", err);
 
     return res.status(INTERNAL_SERVER_ERROR_CODE).json({
       status: ERROR,
       message: "Internal server error",
-      data: {},
     });
   }
 };
 
-const updateStatus = async (req, res) => {
+exports.updateStatus = async (req, res) => {
   try {
     const { id } = req.params;
+    const userId = req.userId;
     const findToDo = await TodoTask.findById(id);
-    var updateStatus;
 
-    if (findToDo.is_completed) {
-      updateStatus = await TodoTask.findByIdAndUpdate(
-        id,
-        { $set: { is_completed: false } },
-        { new: true }
-      );
-    } else {
-      updateStatus = await TodoTask.findByIdAndUpdate(
-        id,
-        { $set: { is_completed: true } },
-        { new: true }
-      );
+    if (!findToDo) {
+      return res.status(OK).json({
+        status: ERROR,
+        message: "Todo not found",
+      });
     }
+
+    if (findToDo.createdBy.toString() !== userId) {
+      return res.status(OK).json({
+        status: ERROR,
+        message: "You are not authorized to update the status of this todo",
+      });
+    }
+
+    const updateStatus = await TodoTask.findByIdAndUpdate(
+      id,
+      { $set: { is_completed: !findToDo.is_completed } },
+      { new: true }
+    );
 
     if (updateStatus) {
       return res.status(OK).json({
@@ -192,23 +208,13 @@ const updateStatus = async (req, res) => {
     return res.status(OK).json({
       status: ERROR,
       message: "Todo status not updated",
-      data: {},
     });
   } catch (err) {
-    console.log("TODO STATUS CHANGE ERROR --->", err);
+    // console.error("TODO STATUS CHANGE ERROR --->", err);
 
     return res.status(INTERNAL_SERVER_ERROR_CODE).json({
       status: ERROR,
       message: "Internal server error",
-      data: {},
     });
   }
-};
-
-module.exports = {
-  add,
-  edit,
-  getUsersToDo,
-  deleteToDo,
-  updateStatus,
 };

@@ -13,7 +13,6 @@ const errorHandle = (schema) => (req, res, next) => {
     return res.status(VALIDATION_CODE).json({
       status: ERROR,
       message: message,
-      data: {},
     });
   }
 };

@@ -1,4 +1,4 @@
-# Todo API - README
+# TODO API - README
 
 Thank you for using the Todo API! This README file will guide you through the process of setting up and running the Todo project API on your local machine.
 
@@ -21,7 +21,7 @@ Before you start, make sure you have the following installed on your machine:
 
         npm install
 
-3.  Configure and create a .env file in the root of the project to store environment variables. this file should contain the following variables::
+3.  Configure and create a .ENV file in the root of the project to store environment variables. this file should contain the following variables::
 
     - API_PORT=
     - MONGO_URI=
@@ -34,4 +34,4 @@ Before you start, make sure you have the following installed on your machine:
 
     The API should now be up and running at
 
-        http://localhost:3030.
+        http://localhost:3030

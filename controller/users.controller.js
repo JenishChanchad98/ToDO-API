@@ -4,7 +4,7 @@ const {
   OK,
   ERROR,
   SUCCESS,
-  VALIDATION_CODE,
+  DATA_CREATED,
   INTERNAL_SERVER_ERROR_CODE,
   BAD_REQUEST,
 } = require("../constants/global.constants");
@@ -14,7 +14,7 @@ const {
 } = require("../helpers/password.helper");
 const authService = require("../helpers/token.helper");
 
-const register = async (req, res) => {
+exports.signUp = async (req, res) => {
   try {
     let body = req.body;
     body.username = body.username.toLowerCase();
@@ -27,7 +27,6 @@ const register = async (req, res) => {
       return res.status(BAD_REQUEST).json({
         status: ERROR,
         message: "User name is exits",
-        data: {},
       });
     }
 
@@ -49,30 +48,26 @@ const register = async (req, res) => {
     );
 
     if (userData) {
-      return res.status(OK).json({
+      return res.status(DATA_CREATED).json({
         status: SUCCESS,
-        message: "User register",
+        message: "User signUp",
         data: userData,
       });
     }
 
     return res.status(OK).json({
       status: ERROR,
-      message: "User not register",
-      data: {},
+      message: "User not signUp",
     });
   } catch (err) {
-    console.log("USER REGISTER ERROR MESSAGE -->", err);
-
     return res.status(INTERNAL_SERVER_ERROR_CODE).json({
       status: ERROR,
       message: "Internal server error",
-      data: {},
     });
   }
 };
 
-const login = async (req, res) => {
+exports.signIn = async (req, res) => {
   try {
     const body = req.body;
 
@@ -104,7 +99,7 @@ const login = async (req, res) => {
 
       return res.status(OK).json({
         status: SUCCESS,
-        message: "login successful",
+        message: "signIn successful",
         data: findUser,
       });
     }
@@ -112,20 +107,12 @@ const login = async (req, res) => {
     return res.status(OK).json({
       status: ERROR,
       message: "Invalid credentials",
-      data: {},
     });
   } catch (err) {
-    console.log("USER LOGIN ERROR -->", err);
-
     return res.status(INTERNAL_SERVER_ERROR_CODE).json({
       status: ERROR,
       message: "Internal server error",
-      data: {},
     });
   }
 };
-
-module.exports = {
-  register,
-  login,
-};
+``

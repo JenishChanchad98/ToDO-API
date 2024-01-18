@@ -15,6 +15,12 @@ require("./dbconnection")
 
     // Route file include.
     app.use(require("./routes/"));
+
+    app.use(function (err, req, res, next) {
+      return res
+        .status(err.status || 500)
+        .send({ message: err.message, stack: err.stack });
+    });
   })
   .catch((err) => {
     console.log(err, "Error");

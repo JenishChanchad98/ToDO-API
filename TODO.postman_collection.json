@@ -10,13 +10,13 @@
 			"name": "users",
 			"item": [
 				{
-					"name": "register",
+					"name": "signup",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"mahesh\",\r\n    \"password\": \"Mahesh@123\",\r\n    \"first_name\": \"Mahesh\",\r\n    \"last_name\": \"Patel\",\r\n    \"mobile\": \"7069525825\"\r\n}",
+							"raw": "{\r\n    \"username\": \"mahesh\",\r\n    \"password\": \"Mahesh@123\",\r\n    \"mobile\": \"7069825025\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,22 +24,21 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/users/register",
-							"protocol": "http",
+							"raw": "{{base_url}}/api/users/signup",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3030",
 							"path": [
+								"api",
 								"users",
-								"register"
+								"signup"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "login",
+					"name": "signin",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -53,15 +52,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/users/login",
-							"protocol": "http",
+							"raw": "{{base_url}}/api/users/signin",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3030",
 							"path": [
+								"api",
 								"users",
-								"login"
+								"signin"
 							]
 						}
 					},
@@ -80,7 +78,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzNmRiZGFkMGQzZDMzYjkyZjRhY2QiLCJ1c2VybmFtZSI6Im1haGVzaCIsImlhdCI6MTY5MDUyOTIyNSwiZXhwIjoxNjkwNTMyODI1fQ.g2f-kF23MI8SqASH9QdL2exDkLa9vhpZMwSBT-bQR7M",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5YTY3ZGY5YjJkMGEyYmNiODJhYzQiLCJ1c2VybmFtZSI6Im1haGVzaCIsImlhdCI6MTcwNTYxNzk0MywiZXhwIjoxNzA1NjIxNTQzfQ.v890HQXXdkmJ4CTiIkvLpsDENN0xxFK1wuhEsYt8Gbk",
 									"type": "string"
 								}
 							]
@@ -89,7 +87,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Laptop\",\r\n    \"description\": \"Laptop in add SSD\",\r\n    \"duedate\" : \"2023-07-29\"\r\n}",
+							"raw": "{\r\n    \"title\": \"Laptop 456\",\r\n    \"description\": \"Laptop in add SSD 456\",\r\n    \"duedate\" : \"2024-01-29\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -97,13 +95,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/todo/add",
-							"protocol": "http",
+							"raw": "{{base_url}}/api/todo/add",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3030",
 							"path": [
+								"api",
 								"todo",
 								"add"
 							]
@@ -119,7 +116,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzNWEzNzE5OWRjMmQ2YTUyYjk0OTUiLCJ1c2VybmFtZSI6ImplbmlzaCIsImlhdCI6MTY5MDUyNjU1NiwiZXhwIjoxNjkwNTMwMTU2fQ.s0x6xQE-ZleDBzqE1COwxR1643JZxigvIQPYnH1ei-k",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5YTY3ZGY5YjJkMGEyYmNiODJhYzQiLCJ1c2VybmFtZSI6Im1haGVzaCIsImlhdCI6MTcwNTYxNzk0MywiZXhwIjoxNzA1NjIxNTQzfQ.v890HQXXdkmJ4CTiIkvLpsDENN0xxFK1wuhEsYt8Gbk",
 									"type": "string"
 								}
 							]
@@ -136,46 +133,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/todo/edit/64c363c1c33a654ca014bc3a",
-							"protocol": "http",
+							"raw": "{{base_url}}/api/todo/edit/65a9aa342bab35c760b9fdad",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3030",
 							"path": [
+								"api",
 								"todo",
 								"edit",
-								"64c363c1c33a654ca014bc3a"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzNWEzNzE5OWRjMmQ2YTUyYjk0OTUiLCJ1c2VybmFtZSI6ImplbmlzaCIsImlhdCI6MTY5MDUyNjU1NiwiZXhwIjoxNjkwNTMwMTU2fQ.s0x6xQE-ZleDBzqE1COwxR1643JZxigvIQPYnH1ei-k",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3030/todo/delete",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3030",
-							"path": [
-								"todo",
-								"delete"
+								"65a9aa342bab35c760b9fdad"
 							]
 						}
 					},
@@ -189,32 +155,51 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzNmRiZGFkMGQzZDMzYjkyZjRhY2QiLCJ1c2VybmFtZSI6Im1haGVzaCIsImlhdCI6MTY5MDUyOTIyNSwiZXhwIjoxNjkwNTMyODI1fQ.g2f-kF23MI8SqASH9QdL2exDkLa9vhpZMwSBT-bQR7M",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5YTY3ZGY5YjJkMGEyYmNiODJhYzQiLCJ1c2VybmFtZSI6Im1haGVzaCIsImlhdCI6MTcwNTYxNzk0MywiZXhwIjoxNzA1NjIxNTQzfQ.v890HQXXdkmJ4CTiIkvLpsDENN0xxFK1wuhEsYt8Gbk",
 									"type": "string"
 								}
 							]
 						},
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"date\": \"2023-07-29\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:3030/todo/getuserstodo",
-							"protocol": "http",
+							"raw": "{{base_url}}/api/todo/getuserstodo",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3030",
 							"path": [
+								"api",
 								"todo",
 								"getuserstodo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzN2Y1MGU3YzQyMGE2NDFiYzQ1MWUiLCJ1c2VybmFtZSI6Im1haGVzaDY3NiIsImlhdCI6MTY5MDUzNTI2NCwiZXhwIjoxNjkwNTM4ODY0fQ.FHEBu9EuuGZtwPQrKKhejZCRTORot65cgAR6tvybGvM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/todo/delete",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"todo",
+								"delete"
 							]
 						}
 					},
@@ -228,7 +213,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzNWEzNzE5OWRjMmQ2YTUyYjk0OTUiLCJ1c2VybmFtZSI6ImplbmlzaCIsImlhdCI6MTY5MDUyNjU1NiwiZXhwIjoxNjkwNTMwMTU2fQ.s0x6xQE-ZleDBzqE1COwxR1643JZxigvIQPYnH1ei-k",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5YTY3ZGY5YjJkMGEyYmNiODJhYzQiLCJ1c2VybmFtZSI6Im1haGVzaCIsImlhdCI6MTcwNTYxNzk0MywiZXhwIjoxNzA1NjIxNTQzfQ.v890HQXXdkmJ4CTiIkvLpsDENN0xxFK1wuhEsYt8Gbk",
 									"type": "string"
 								}
 							]
@@ -236,16 +221,15 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3030/todo/updatestatus/64c3686616255b97cb0e04fc",
-							"protocol": "http",
+							"raw": "{{base_url}}/api/todo/updatestatus/65a9aa342bab35c760b9fdad",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3030",
 							"path": [
+								"api",
 								"todo",
 								"updatestatus",
-								"64c3686616255b97cb0e04fc"
+								"65a9aa342bab35c760b9fdad"
 							]
 						}
 					},
