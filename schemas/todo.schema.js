@@ -8,9 +8,7 @@ const toDoSchema = new mongoose.Schema(
     is_completed: { type: Boolean, default: false }, // false-pending true-completed
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Todo", toDoSchema);

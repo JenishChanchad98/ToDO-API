@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const path = require("path");
 
 require("dotenv").config();
 const port = process.env.API_PORT || 3031;
@@ -13,8 +14,8 @@ require("./dbconnection")
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    // Route file include.
     app.use(require("./routes/"));
+    app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
     app.use(function (err, req, res, next) {
       return res
