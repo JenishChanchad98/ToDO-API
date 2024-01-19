@@ -68,7 +68,7 @@
 			]
 		},
 		{
-			"name": "To Do",
+			"name": "ToDo",
 			"item": [
 				{
 					"name": "Add",
@@ -229,6 +229,160 @@
 								"api",
 								"todo",
 								"updatestatus",
+								"65a9aa342bab35c760b9fdad"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "files",
+			"item": [
+				{
+					"name": "Add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5YTY3ZGY5YjJkMGEyYmNiODJhYzQiLCJ1c2VybmFtZSI6Im1haGVzaCIsImlhdCI6MTcwNTY0MjcxMCwiZXhwIjoxNzA1NjQ2MzEwfQ.Kr-yw6ukJPT7G1DplNKVwg3-tqh-NiBC1CwUIEeIghg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/C:/Users/SARVADHI/Downloads/pexels-craig-adderley-1563355.jpg"
+								},
+								{
+									"key": "todoId",
+									"value": "65a9aa342bab35c760b9fdad",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/files/add",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5YTY3ZGY5YjJkMGEyYmNiODJhYzQiLCJ1c2VybmFtZSI6Im1haGVzaCIsImlhdCI6MTcwNTY0MTc5MiwiZXhwIjoxNzA1NjQ1MzkyfQ.ywbnwXIafEfpFf0Ru-qGI7wdCjV16QGoCg6RbPhYT20",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "todoId",
+									"value": "65a9aa342bab35c760b9fdad",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/C:/Users/SARVADHI/Downloads/pexels-craig-adderley-1563355.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/files/update/65aa02bc9328f119483177b1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"update",
+								"65aa02bc9328f119483177b1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5YTY3ZGY5YjJkMGEyYmNiODJhYzQiLCJ1c2VybmFtZSI6Im1haGVzaCIsImlhdCI6MTcwNTY0MjcxMCwiZXhwIjoxNzA1NjQ2MzEwfQ.Kr-yw6ukJPT7G1DplNKVwg3-tqh-NiBC1CwUIEeIghg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/files/delete/65aa0b9ed114d6d9897364d8",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"delete",
+								"65aa0b9ed114d6d9897364d8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Todo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5YTY3ZGY5YjJkMGEyYmNiODJhYzQiLCJ1c2VybmFtZSI6Im1haGVzaCIsImlhdCI6MTcwNTY0MTc5MiwiZXhwIjoxNzA1NjQ1MzkyfQ.ywbnwXIafEfpFf0Ru-qGI7wdCjV16QGoCg6RbPhYT20",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/files/getToDos/65a9aa342bab35c760b9fdad",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"getToDos",
 								"65a9aa342bab35c760b9fdad"
 							]
 						}
